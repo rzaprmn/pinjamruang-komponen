@@ -1,0 +1,731 @@
+/* ==========================================================================
+   PINJAMRUANG ITTS — STYLESHEET RESMI (TUGAS 2 MODUL 07)
+   CSS Modern: Custom Properties, CSS Nesting, :focus-visible, & :has()
+   ========================================================================== */
+
+/* 1. TOKEN DESAIN (CSS CUSTOM PROPERTIES) */
+:root {
+  /* Palet Warna Primer & Aksen (Telkom Red & Navy) */
+  --warna-primer: #e11d48;
+  --warna-primer-hover: #be123c;
+  --warna-navy: #0f172a;
+  --warna-navy-ringan: #1e293b;
+  --warna-aksen: #0284c7;
+  --warna-aksen-fokus: #2563eb;
+
+  /* Warna Netral & Latar Belakang */
+  --warna-latar: #f8fafc;
+  --warna-permukaan: #ffffff;
+  --warna-garis: #e2e8f0;
+  --warna-garis-tebal: #cbd5e1;
+
+  /* Warna Teks */
+  --warna-teks-utama: #0f172a;
+  --warna-teks-sekunder: #475569;
+  --warna-teks-terang: #94a3b8;
+
+  /* Status Warna */
+  --warna-sukses: #15803d;
+  --warna-sukses-latar: #f0fdf4;
+  --warna-galat: #b91c1c;
+  --warna-galat-latar: #fef2f2;
+  --warna-peringatan: #b45309;
+  --warna-peringatan-latar: #fffbeb;
+
+  /* Skala Spacing Berbasis 8-pt Grid */
+  --ruang-1: 4px;
+  --ruang-2: 8px;
+  --ruang-3: 12px;
+  --ruang-4: 16px;
+  --ruang-5: 20px;
+  --ruang-6: 24px;
+  --ruang-8: 32px;
+  --ruang-10: 40px;
+  --ruang-12: 48px;
+
+  /* Sudut Kelengkungan (Border Radius) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-bulat: 9999px;
+
+  /* Bayangan (Box Shadow) */
+  --bayangan-kartu: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --bayangan-tinggi: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Transisi */
+  --transisi-cepat: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transisi-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. RESET DASAR & TYPOGRAPHY */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--warna-teks-utama);
+  background-color: var(--warna-latar);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Aksesibilitas: Indikator Fokus Keyboard (:focus-visible) */
+:focus-visible {
+  outline: 3px solid var(--warna-aksen-fokus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Kontainer Standar */
+.kontainer {
+  width: 100%;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--ruang-4);
+  padding-right: var(--ruang-4);
+}
+
+/* ==========================================================================
+   KOMPONEN 1: HEADER & MENU NAVIGASI RESPONSIF
+   ========================================================================== */
+.header-utama {
+  background-color: var(--warna-permukaan);
+  border-bottom: 1px solid var(--warna-garis);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+
+  .header-konten {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--ruang-2);
+    text-decoration: none;
+    color: var(--warna-navy);
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    .logo-ikon {
+      font-size: 1.6rem;
+    }
+
+    strong {
+      color: var(--warna-primer);
+    }
+  }
+
+  /* Tombol Menu Mobile */
+  .tombol-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--warna-garis-tebal);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    cursor: pointer;
+
+    .garis-menu {
+      width: 100%;
+      height: 2px;
+      background-color: var(--warna-navy);
+      border-radius: 2px;
+      transition: transform var(--transisi-cepat), opacity var(--transisi-cepat);
+    }
+  }
+
+  /* Navigasi Utama */
+  .nav-utama {
+    .nav-daftar {
+      display: flex;
+      list-style: none;
+      gap: var(--ruang-4);
+      align-items: center;
+
+      .nav-tautan {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--warna-teks-sekunder);
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: var(--ruang-2) var(--ruang-3);
+        border-radius: var(--radius-sm);
+        transition: color var(--transisi-cepat), background-color var(--transisi-cepat);
+
+        &:hover {
+          color: var(--warna-primer);
+          background-color: #fff1f2;
+        }
+
+        &.aktif {
+          color: var(--warna-primer);
+          background-color: #ffe4e6;
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   SEKSI HERO
+   ========================================================================== */
+.seksi-hero {
+  padding: var(--ruang-8) 0 var(--ruang-6);
+  text-align: center;
+
+  h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--warna-navy);
+    letter-spacing: -0.025em;
+    margin-bottom: var(--ruang-2);
+  }
+
+  .deskripsi-hero {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    color: var(--warna-teks-sekunder);
+  }
+}
+
+/* ==========================================================================
+   KOMPONEN 2: KARTU RUANGAN INTERAKTIF & STATUS KETERSEDIAAN (GRID)
+   ========================================================================== */
+.seksi-katalog {
+  padding: var(--ruang-6) 0 var(--ruang-10);
+
+  .katalog-header {
+    margin-bottom: var(--ruang-6);
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--warna-navy);
+    }
+
+    .subjudul {
+      color: var(--warna-teks-sekunder);
+      font-size: 0.95rem;
+    }
+  }
+
+  .grid-ruangan {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--ruang-6);
+  }
+
+  /* Elemen Kartu Ruangan */
+  .kartu-ruangan {
+    background-color: var(--warna-permukaan);
+    border: 1px solid var(--warna-garis);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--bayangan-kartu);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transisi-normal), box-shadow var(--transisi-normal), border-color var(--transisi-normal);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--bayangan-tinggi);
+      border-color: var(--warna-garis-tebal);
+    }
+
+    /* CSS Nesting & :has() Selektor Induk Modern */
+    &:has(.tombol-pilih-ruang:focus-visible) {
+      outline: 2px solid var(--warna-primer);
+    }
+
+    .wadah-gambar {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background-color: var(--warna-navy);
+
+      .ilustrasi-ruang {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .status-badge {
+        position: absolute;
+        top: var(--ruang-3);
+        right: var(--ruang-3);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: var(--radius-bulat);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+
+        &.status-tersedia {
+          background-color: var(--warna-sukses-latar);
+          color: var(--warna-sukses);
+          border: 1px solid #86efac;
+        }
+
+        &.status-terpakai {
+          background-color: var(--warna-peringatan-latar);
+          color: var(--warna-peringatan);
+          border: 1px solid #fde047;
+        }
+      }
+    }
+
+    .kartu-konten {
+      padding: var(--ruang-5);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--warna-navy);
+        margin-bottom: var(--ruang-1);
+      }
+
+      .lokasi {
+        font-size: 0.9rem;
+        color: var(--warna-teks-sekunder);
+        margin-bottom: var(--ruang-3);
+      }
+
+      .daftar-fasilitas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ruang-2);
+        list-style: none;
+        margin-bottom: var(--ruang-4);
+
+        .badge-fasilitas {
+          font-size: 0.8rem;
+          font-weight: 600;
+          background-color: #f1f5f9;
+          color: var(--warna-navy-ringan);
+          padding: 4px 10px;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--warna-garis);
+        }
+      }
+
+      .sop-singkat {
+        font-size: 0.88rem;
+        color: var(--warna-teks-sekunder);
+        margin-bottom: var(--ruang-5);
+        flex: 1;
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   TOMBOL DASAR & VARIAN
+   ========================================================================== */
+.tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transisi-cepat);
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &[aria-busy="true"] {
+    cursor: wait;
+    opacity: 0.8;
+  }
+}
+
+.tombol-primer {
+  background-color: var(--warna-primer);
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    background-color: var(--warna-primer-hover);
+  }
+}
+
+.tombol-sekunder {
+  background-color: #ffffff;
+  color: var(--warna-teks-sekunder);
+  border-color: var(--warna-garis-tebal);
+
+  &:hover:not(:disabled) {
+    background-color: #f1f5f9;
+    color: var(--warna-teks-utama);
+  }
+}
+
+.tombol-pilih-ruang {
+  width: 100%;
+  background-color: var(--warna-navy);
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    background-color: var(--warna-navy-ringan);
+  }
+}
+
+/* ==========================================================================
+   KOMPONEN 3: FORMULIR PENGAJUAN PEMINJAMAN DENGAN VALIDASI AKSESIBEL
+   ========================================================================== */
+.seksi-form {
+  padding-bottom: var(--ruang-12);
+
+  .form-kartu {
+    background-color: var(--warna-permukaan);
+    border: 1px solid var(--warna-garis);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--bayangan-kartu);
+    padding: var(--ruang-8);
+    max-width: 780px;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--warna-navy);
+    }
+
+    .subjudul {
+      color: var(--warna-teks-sekunder);
+      font-size: 0.95rem;
+      margin-bottom: var(--ruang-6);
+    }
+  }
+
+  .grup-input {
+    margin-bottom: var(--ruang-5);
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--warna-navy);
+      margin-bottom: var(--ruang-1);
+
+      .tanda-wajib {
+        color: var(--warna-primer);
+      }
+    }
+
+    input, select {
+      width: 100%;
+      font: inherit;
+      padding: 10px 14px;
+      border: 1px solid var(--warna-garis-tebal);
+      border-radius: var(--radius-md);
+      background-color: #ffffff;
+      color: var(--warna-teks-utama);
+      transition: border-color var(--transisi-cepat), box-shadow var(--transisi-cepat);
+
+      &[readonly] {
+        background-color: #f8fafc;
+        color: var(--warna-teks-sekunder);
+        cursor: not-allowed;
+      }
+
+      /* Indikator Validitas Aksesibel */
+      &[aria-invalid="true"] {
+        border-color: var(--warna-galat);
+        background-color: var(--warna-galat-latar);
+      }
+    }
+
+    .petunjuk-input {
+      font-size: 0.82rem;
+      color: var(--warna-teks-terang);
+      margin-top: var(--ruang-1);
+    }
+
+    .pesan-galat {
+      font-size: 0.85rem;
+      color: var(--warna-galat);
+      font-weight: 600;
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
+  }
+
+  .baris-dua-kolom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ruang-4);
+  }
+
+  .aksi-form {
+    display: flex;
+    gap: var(--ruang-4);
+    margin-top: var(--ruang-6);
+    flex-wrap: wrap;
+  }
+
+  .status-global {
+    margin-top: var(--ruang-4);
+    padding: var(--ruang-3) var(--ruang-4);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    display: none;
+
+    &.status-tampil {
+      display: block;
+      background-color: var(--warna-sukses-latar);
+      color: var(--warna-sukses);
+      border: 1px solid #86efac;
+    }
+  }
+}
+
+/* ==========================================================================
+   KOMPONEN 4: DIALOG KONFIRMASI PEMINJAMAN (<dialog> MODAL)
+   ========================================================================== */
+.modal-dialog {
+  margin: auto;
+  border: 1px solid var(--warna-garis-tebal);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  max-width: 520px;
+  width: 90%;
+  box-shadow: var(--bayangan-tinggi);
+  background-color: var(--warna-permukaan);
+
+  /* Latar Belakang Peredup Bawaan HTML5 */
+  &::backdrop {
+    background-color: rgb(15 23 42 / 0.6);
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-wadah {
+    padding: var(--ruang-6);
+
+    .modal-judul {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--warna-navy);
+      margin-bottom: var(--ruang-2);
+    }
+
+    .modal-deskripsi {
+      font-size: 0.92rem;
+      color: var(--warna-teks-sekunder);
+      margin-bottom: var(--ruang-5);
+    }
+
+    .ringkasan-pengajuan {
+      background-color: #f8fafc;
+      border: 1px solid var(--warna-garis);
+      border-radius: var(--radius-md);
+      padding: var(--ruang-4);
+      margin-bottom: var(--ruang-6);
+
+      .item-ringkasan {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--ruang-2);
+        font-size: 0.9rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .label-ringkasan {
+          color: var(--warna-teks-sekunder);
+        }
+
+        .nilai-ringkasan {
+          font-weight: 600;
+          color: var(--warna-navy);
+          text-align: right;
+          max-width: 65%;
+          word-break: break-word;
+        }
+      }
+    }
+
+    .modal-aksi {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--ruang-3);
+
+      .tombol-batal {
+        background-color: #ffffff;
+        border-color: var(--warna-garis-tebal);
+        color: var(--warna-teks-sekunder);
+
+        &:hover {
+          background-color: #f1f5f9;
+        }
+      }
+
+      .tombol-konfirmasi {
+        background-color: var(--warna-primer);
+        color: #ffffff;
+
+        &:hover {
+          background-color: var(--warna-primer-hover);
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   KOMPONEN 5: FOOTER INFORMASI SARPRAS & HAK CIPTA
+   ========================================================================== */
+.footer-utama {
+  background-color: var(--warna-navy);
+  color: #cbd5e1;
+  margin-top: auto;
+  padding-top: var(--ruang-10);
+
+  .footer-konten {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--ruang-8);
+    padding-bottom: var(--ruang-8);
+  }
+
+  .footer-kolom {
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: var(--ruang-3);
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: var(--ruang-2);
+    }
+
+    .alamat-kampus {
+      color: var(--warna-teks-terang);
+      font-size: 0.85rem;
+    }
+
+    .footer-tautan {
+      list-style: none;
+
+      li {
+        font-size: 0.88rem;
+        margin-bottom: var(--ruang-2);
+        line-height: 1.5;
+        position: relative;
+        padding-left: var(--ruang-3);
+
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: var(--warna-primer);
+        }
+      }
+    }
+  }
+
+  .footer-bawah {
+    border-top: 1px solid var(--warna-navy-ringan);
+    padding: var(--ruang-4) 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--warna-teks-terang);
+  }
+}
+
+/* ==========================================================================
+   DESAIN RESPONSIF (BREAKPOINTS MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header-utama {
+    .tombol-menu {
+      display: flex;
+    }
+
+    .nav-utama {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background-color: var(--warna-permukaan);
+      border-bottom: 1px solid var(--warna-garis);
+      box-shadow: var(--bayangan-tinggi);
+      padding: var(--ruang-4);
+
+      &[hidden] {
+        display: none;
+      }
+
+      .nav-daftar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--ruang-2);
+
+        .nav-tautan {
+          padding: var(--ruang-3);
+        }
+      }
+    }
+  }
+
+  .seksi-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .seksi-form {
+    .form-kartu {
+      padding: var(--ruang-5);
+    }
+
+    .baris-dua-kolom {
+      grid-template-columns: 1fr;
+    }
+
+    .aksi-form {
+      flex-direction: column;
+
+      .tombol {
+        width: 100%;
+      }
+    }
+  }
+
+  .modal-dialog .modal-wadah .modal-aksi {
+    flex-direction: column-reverse;
+
+    .tombol {
+      width: 100%;
+    }
+  }
+}

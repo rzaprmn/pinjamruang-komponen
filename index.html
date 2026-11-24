@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PinjamRuang ITTS — Sistem Peminjaman Ruang Kampus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ===================================================================
+       KOMPONEN 1: HEADER & MENU NAVIGASI RESPONSIF (DISCLOSURE PATTERN)
+       Aksesibel dengan aria-expanded, aria-controls, dan keyboard Escape
+       =================================================================== -->
+  <header class="header-utama">
+    <div class="kontainer header-konten">
+      <a href="#" class="logo-brand" aria-label="PinjamRuang ITTS Beranda">
+        <span class="logo-ikon">🏛️</span>
+        <span class="logo-teks">PinjamRuang <strong>ITTS</strong></span>
+      </a>
+
+      <!-- Tombol Hamburger untuk Navigasi Mobile -->
+      <button id="tombol-menu" type="button" class="tombol-menu" aria-expanded="false" aria-controls="menu-utama" aria-label="Buka menu navigasi">
+        <span class="garis-menu"></span>
+        <span class="garis-menu"></span>
+        <span class="garis-menu"></span>
+      </button>
+
+      <!-- Navigasi Utama -->
+      <nav id="menu-utama" class="nav-utama" aria-label="Navigasi Utama" hidden>
+        <ul class="nav-daftar">
+          <li><a href="#katalog" class="nav-tautan aktif">Katalog Ruangan</a></li>
+          <li><a href="#form-pengajuan" class="nav-tautan">Ajukan Peminjaman</a></li>
+          <li><a href="#status-layanan" class="nav-tautan">Status Layanan</a></li>
+          <li><a href="#kontak" class="nav-tautan">Bantuan Sarpras</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       AREA KONTEN UTAMA (MAIN)
+       =================================================================== -->
+  <main id="konten-utama" class="kontainer">
+
+    <!-- Hero Ringkasan Halaman Wireframe Tugas 1 (Layar 3 & 5) -->
+    <section class="seksi-hero" aria-labelledby="judul-hero">
+      <h1 id="judul-hero">Peminjaman Sarana & Prasarana Kampus</h1>
+      <p class="deskripsi-hero">
+        Layanan digital terpadu untuk organisasi mahasiswa (UKM, HIMA, BEM) Institut Teknologi Telkom Surabaya dalam memeriksa ketersediaan ruangan kampus dan mengajukan perizinan secara transparan.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         KOMPONEN 2: KARTU RUANGAN INTERAKTIF & STATUS KETERSEDIAAN (GRID)
+         Memakai tag <article>, heading semantik, alt gambar, & badge fasilitas
+         =================================================================== -->
+    <section id="katalog" class="seksi-katalog" aria-labelledby="judul-katalog">
+      <div class="katalog-header">
+        <h2 id="judul-katalog">Katalog & Ketersediaan Ruangan</h2>
+        <p class="subjudul">Pilih ruangan yang sesuai dengan kebutuhan agenda organisasimu.</p>
+      </div>
+
+      <div class="grid-ruangan">
+        <!-- Kartu 1: Lab Komputer 3 -->
+        <article class="kartu-ruangan" data-ruang="Lab Komputer 3 (Gedung B Lt. 2)">
+          <div class="wadah-gambar">
+            <svg class="ilustrasi-ruang" viewBox="0 0 320 180" role="img" aria-label="Ilustrasi Lab Komputer 3 ITTS dengan deretan komputer workstation">
+              <rect width="320" height="180" fill="#1e293b"/>
+              <rect x="30" y="30" width="260" height="110" rx="8" fill="#334155"/>
+              <circle cx="160" cy="75" r="28" fill="#0284c7"/>
+              <rect x="120" y="115" width="80" height="12" rx="4" fill="#64748b"/>
+              <text x="160" y="82" fill="#ffffff" font-size="16" font-family="system-ui" text-anchor="middle" font-weight="bold">Lab Komputer 3</text>
+            </svg>
+            <span class="status-badge status-tersedia" role="status">Tersedia</span>
+          </div>
+          <div class="kartu-konten">
+            <h3>Lab Komputer 3</h3>
+            <p class="lokasi">Gedung B, Lantai 2 · Kapasitas 40 Orang</p>
+            <ul class="daftar-fasilitas" aria-label="Fasilitas Lab Komputer 3">
+              <li class="badge-fasilitas">40 PC Core i7</li>
+              <li class="badge-fasilitas">Proyektor Full HD</li>
+              <li class="badge-fasilitas">AC Sentral</li>
+              <li class="badge-fasilitas">LAN Gigabit</li>
+            </ul>
+            <p class="sop-singkat">Cocok untuk workshop CTF, praktikum pemrograman, dan sertifikasi IT.</p>
+            <button type="button" class="tombol tombol-pilih-ruang" data-nama-ruang="Lab Komputer 3 (Gedung B Lt. 2)" aria-label="Pilih Lab Komputer 3 untuk dipinjam">
+              Pilih Ruangan Ini
+            </button>
+          </div>
+        </article>
+
+        <!-- Kartu 2: Auditorium Utama ITTS -->
+        <article class="kartu-ruangan" data-ruang="Auditorium Utama ITTS (Gedung Rektorat Lt. 3)">
+          <div class="wadah-gambar">
+            <svg class="ilustrasi-ruang" viewBox="0 0 320 180" role="img" aria-label="Ilustrasi Auditorium Utama ITTS dengan panggung dan pencahayaan seminar">
+              <rect width="320" height="180" fill="#1e293b"/>
+              <rect x="30" y="30" width="260" height="110" rx="8" fill="#334155"/>
+              <circle cx="160" cy="75" r="28" fill="#4f46e5"/>
+              <rect x="120" y="115" width="80" height="12" rx="4" fill="#64748b"/>
+              <text x="160" y="82" fill="#ffffff" font-size="16" font-family="system-ui" text-anchor="middle" font-weight="bold">Auditorium ITTS</text>
+            </svg>
+            <span class="status-badge status-tersedia" role="status">Tersedia</span>
+          </div>
+          <div class="kartu-konten">
+            <h3>Auditorium Utama</h3>
+            <p class="lokasi">Gedung Rektorat, Lantai 3 · Kapasitas 250 Orang</p>
+            <ul class="daftar-fasilitas" aria-label="Fasilitas Auditorium Utama">
+              <li class="badge-fasilitas">Sound System 5000W</li>
+              <li class="badge-fasilitas">Videotron LED</li>
+              <li class="badge-fasilitas">Panggung Seminar</li>
+              <li class="badge-fasilitas">4 Mic Wireless</li>
+            </ul>
+            <p class="sop-singkat">Diperuntukkan untuk seminar nasional, pelantikan organisasi, dan kuliah tamu.</p>
+            <button type="button" class="tombol tombol-pilih-ruang" data-nama-ruang="Auditorium Utama ITTS (Gedung Rektorat Lt. 3)" aria-label="Pilih Auditorium Utama untuk dipinjam">
+              Pilih Ruangan Ini
+            </button>
+          </div>
+        </article>
+
+        <!-- Kartu 3: Ruang Rapat Ormawa 1 -->
+        <article class="kartu-ruangan" data-ruang="Ruang Rapat Ormawa 1 (Gedung SAC Lt. 1)">
+          <div class="wadah-gambar">
+            <svg class="ilustrasi-ruang" viewBox="0 0 320 180" role="img" aria-label="Ilustrasi Ruang Rapat Ormawa 1 ITTS">
+              <rect width="320" height="180" fill="#1e293b"/>
+              <rect x="30" y="30" width="260" height="110" rx="8" fill="#334155"/>
+              <circle cx="160" cy="75" r="28" fill="#0d9488"/>
+              <rect x="120" y="115" width="80" height="12" rx="4" fill="#64748b"/>
+              <text x="160" y="82" fill="#ffffff" font-size="16" font-family="system-ui" text-anchor="middle" font-weight="bold">Ruang Rapat 1</text>
+            </svg>
+            <span class="status-badge status-terpakai" role="status">Terpakai Pagi</span>
+          </div>
+          <div class="kartu-konten">
+            <h3>Ruang Rapat Ormawa 1</h3>
+            <p class="lokasi">Gedung Student Center, Lantai 1 · Kapasitas 20 Orang</p>
+            <ul class="daftar-fasilitas" aria-label="Fasilitas Ruang Rapat Ormawa 1">
+              <li class="badge-fasilitas">Meja Konferensi</li>
+              <li class="badge-fasilitas">Smart TV 65 Inch</li>
+              <li class="badge-fasilitas">Whiteboard Besar</li>
+            </ul>
+            <p class="sop-singkat">Dikhususkan untuk rapat koordinasi internal UKM dan sidang pleno kepengurusan.</p>
+            <button type="button" class="tombol tombol-pilih-ruang" data-nama-ruang="Ruang Rapat Ormawa 1 (Gedung SAC Lt. 1)" aria-label="Pilih Ruang Rapat Ormawa 1 untuk dipinjam">
+              Pilih Ruangan Ini
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         KOMPONEN 3: FORMULIR PENGAJUAN PEMINJAMAN DENGAN VALIDASI AKSESIBEL
+         Memakai novalidate, label eksplisit, aria-describedby, & aria-invalid
+         =================================================================== -->
+    <section class="seksi-form" aria-labelledby="judul-form">
+      <div class="form-kartu">
+        <h2 id="judul-form">Formulir Pengajuan Peminjaman Digital</h2>
+        <p class="subjudul">Lengkapi data perizinan peminjaman ruangan dengan teliti.</p>
+
+        <form id="form-pengajuan" novalidate>
+          <!-- Ruangan Terpilih -->
+          <div class="grup-input">
+            <label for="ruangan">Ruangan yang Dipilih <span class="tanda-wajib" aria-hidden="true">*</span></label>
+            <input type="text" id="ruangan" name="ruangan" required readonly value="Lab Komputer 3 (Gedung B Lt. 2)" aria-describedby="galat-ruangan info-ruangan">
+            <p id="info-ruangan" class="petunjuk-input">Klik tombol "Pilih Ruangan Ini" di atas untuk mengubah pilihan ruangan.</p>
+            <p id="galat-ruangan" class="pesan-galat" role="alert"></p>
+          </div>
+
+          <!-- Nama Organisasi -->
+          <div class="grup-input">
+            <label for="organisasi">Nama Organisasi / UKM <span class="tanda-wajib" aria-hidden="true">*</span></label>
+            <input type="text" id="organisasi" name="organisasi" required placeholder="Contoh: UKM Cyber Security ITTS" autocomplete="organization" aria-describedby="galat-organisasi">
+            <p id="galat-organisasi" class="pesan-galat" role="alert"></p>
+          </div>
+
+          <!-- Nama Agenda Kegiatan -->
+          <div class="grup-input">
+            <label for="agenda">Nama Agenda / Kegiatan <span class="tanda-wajib" aria-hidden="true">*</span></label>
+            <input type="text" id="agenda" name="agenda" required minlength="5" placeholder="Contoh: Workshop Hands-on CTF Internal ITTS" aria-describedby="galat-agenda">
+            <p id="galat-agenda" class="pesan-galat" role="alert"></p>
+          </div>
+
+          <div class="baris-dua-kolom">
+            <!-- Tanggal Kegiatan -->
+            <div class="grup-input">
+              <label for="tanggal">Tanggal Peminjaman <span class="tanda-wajib" aria-hidden="true">*</span></label>
+              <input type="date" id="tanggal" name="tanggal" required aria-describedby="galat-tanggal">
+              <p id="galat-tanggal" class="pesan-galat" role="alert"></p>
+            </div>
+
+            <!-- Sesi Waktu -->
+            <div class="grup-input">
+              <label for="sesi">Sesi Waktu <span class="tanda-wajib" aria-hidden="true">*</span></label>
+              <select id="sesi" name="sesi" required aria-describedby="galat-sesi">
+                <option value="">— Pilih Sesi —</option>
+                <option value="Pagi (08:00 - 12:00 WIB)">Pagi (08:00 - 12:00 WIB)</option>
+                <option value="Siang (13:00 - 17:00 WIB)">Siang (13:00 - 17:00 WIB)</option>
+                <option value="Malam (18:30 - 21:30 WIB)">Malam (18:30 - 21:30 WIB)</option>
+                <option value="Seharian Penuh (08:00 - 17:00 WIB)">Seharian Penuh (08:00 - 17:00 WIB)</option>
+              </select>
+              <p id="galat-sesi" class="pesan-galat" role="alert"></p>
+            </div>
+          </div>
+
+          <!-- Estimasi Peserta -->
+          <div class="grup-input">
+            <label for="peserta">Jumlah Estimasi Peserta <span class="tanda-wajib" aria-hidden="true">*</span></label>
+            <input type="number" id="peserta" name="peserta" min="1" max="500" required placeholder="Contoh: 35" aria-describedby="galat-peserta">
+            <p id="galat-peserta" class="pesan-galat" role="alert"></p>
+          </div>
+
+          <!-- Unggah Dokumen TOR / Proposal (PDF) -->
+          <div class="grup-input">
+            <label for="berkas-tor">Unggah TOR / Surat Proposal (Format PDF, Maks 5 MB) <span class="tanda-wajib" aria-hidden="true">*</span></label>
+            <input type="file" id="berkas-tor" name="berkas_tor" accept=".pdf,application/pdf" required aria-describedby="galat-berkas info-berkas">
+            <p id="info-berkas" class="petunjuk-input">Hanya menerima format .pdf resmi bertandatangan ketua ormawa.</p>
+            <p id="galat-berkas" class="pesan-galat" role="alert"></p>
+          </div>
+
+          <div class="aksi-form">
+            <button id="tombol-ajukan" type="submit" class="tombol tombol-primer">
+              Tinjau & Lanjutkan Pengajuan
+            </button>
+            <button id="tombol-reset" type="reset" class="tombol tombol-sekunder">
+              Bersihkan Formulir
+            </button>
+          </div>
+        </form>
+
+        <p id="status-pengajuan" class="status-global" role="status"></p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         KOMPONEN 4: DIALOG KONFIRMASI PEMINJAMAN (<dialog> MODAL)
+         Aksesibel dengan aria-labelledby, trap fokus, & showModal()
+         =================================================================== -->
+    <dialog id="dialog-konfirmasi" class="modal-dialog" aria-labelledby="judul-konfirmasi" aria-describedby="deskripsi-konfirmasi">
+      <div class="modal-wadah">
+        <h2 id="judul-konfirmasi" class="modal-judul">Konfirmasi Pengajuan Peminjaman</h2>
+        <p id="deskripsi-konfirmasi" class="modal-deskripsi">
+          Pastikan rincian pengajuan ruangan kampus berikut sudah sesuai sebelum dikirimkan ke alur persetujuan BEM, Kemahasiswaan, dan Sarpras.
+        </p>
+
+        <div class="ringkasan-pengajuan" aria-label="Ringkasan Data Pengajuan">
+          <div class="item-ringkasan">
+            <span class="label-ringkasan">Ruangan:</span>
+            <strong id="ringkas-ruangan" class="nilai-ringkasan">-</strong>
+          </div>
+          <div class="item-ringkasan">
+            <span class="label-ringkasan">Organisasi:</span>
+            <span id="ringkas-organisasi" class="nilai-ringkasan">-</span>
+          </div>
+          <div class="item-ringkasan">
+            <span class="label-ringkasan">Agenda:</span>
+            <span id="ringkas-agenda" class="nilai-ringkasan">-</span>
+          </div>
+          <div class="item-ringkasan">
+            <span class="label-ringkasan">Waktu Pelaksanaan:</span>
+            <span id="ringkas-waktu" class="nilai-ringkasan">-</span>
+          </div>
+          <div class="item-ringkasan">
+            <span class="label-ringkasan">Berkas Lampiran:</span>
+            <span id="ringkas-berkas" class="nilai-ringkasan">-</span>
+          </div>
+        </div>
+
+        <div class="modal-aksi">
+          <button id="tombol-batal-modal" type="button" class="tombol tombol-batal">
+            Kembali & Ubah
+          </button>
+          <button id="tombol-kirim-modal" type="button" class="tombol tombol-konfirmasi">
+            Ya, Kirimkan Pengajuan
+          </button>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <!-- ===================================================================
+       KOMPONEN 5: FOOTER INFORMASI SARPRAS & HAK CIPTA
+       Memakai tag <footer> semantik, kontak helpdesk, & teks hak cipta ©
+       =================================================================== -->
+  <footer id="kontak" class="footer-utama">
+    <div class="kontainer footer-konten">
+      <div class="footer-kolom">
+        <h3>PinjamRuang ITTS</h3>
+        <p>Sistem Informasi Manajemen Sarana & Prasarana Kampus Institut Teknologi Telkom Surabaya.</p>
+        <p class="alamat-kampus">Jl. Ketintang No. 156, Gayungan, Surabaya, Jawa Timur 60231</p>
+      </div>
+
+      <div class="footer-kolom">
+        <h3>Layanan Bantuan & Satpam</h3>
+        <ul class="footer-tautan">
+          <li>Pos Keamanan Utama: Pintu Masuk Rektorat (24 Jam)</li>
+          <li>Unit Sarpras: Gedung A Lt. 1 (08.00 - 16.00 WIB)</li>
+          <li>Email: sarpras@ittelkom-sby.ac.id</li>
+          <li>WhatsApp Helpdesk: +62 812-3456-7890</li>
+        </ul>
+      </div>
+
+      <div class="footer-kolom">
+        <h3>Ketentuan Peminjaman</h3>
+        <ul class="footer-tautan">
+          <li>Wajib mengajukan H-3 sebelum tanggal pelaksanaan agenda.</li>
+          <li>Memiliki Surat Izin Resmi ber-QR Code untuk verifikasi satpam.</li>
+          <li>Menjaga kebersihan dan merapikan kembali perangkat lab.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bawah">
+      <div class="kontainer">
+        <p>© 2026 PinjamRuang ITTS — Bagian Sarana & Prasarana Kampus. Hak Cipta Dilindungi Undang-Undang.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
